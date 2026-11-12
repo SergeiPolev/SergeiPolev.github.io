@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prologi — Game Audio Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Layout: one narrow reading column; each project is a "case" block with a credits rail on the left and evidence on the right. */
+:root{
+  --paper:#f2f4f3;
+  --surface:#ffffff;
+  --ink:#0f1e27;
+  --muted:#55656d;
+  --rule:#d5dcdc;
+  --accent:#d9480f;      /* buoy orange */
+  --sea:#0b6e79;         /* secondary, for track numbers and tags */
+  --display:"Archivo", "Helvetica Neue", Arial, sans-serif;
+  --body:"IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0c161c; --surface:#122029; --ink:#e7eef0; --muted:#97a8ae;
+    --rule:#23343d; --accent:#ff7a3d; --sea:#4fc3cf; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0c161c; --surface:#122029; --ink:#e7eef0; --muted:#97a8ae;
+  --rule:#23343d; --accent:#ff7a3d; --sea:#4fc3cf; color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font:400 16px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+a{color:var(--ink);text-decoration-color:var(--accent);text-underline-offset:3px;text-decoration-thickness:2px}
+a:hover{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+.wrap{max-width:920px;margin:0 auto;padding:0 20px}
+header{padding:56px 0 36px;border-bottom:1px solid var(--rule)}
+.alias{font:500 13px/1 var(--mono);color:var(--sea);letter-spacing:.06em;text-transform:uppercase;margin:0 0 14px}
+h1{font:800 clamp(34px,6vw,56px)/1.02 var(--display);margin:0 0 14px;letter-spacing:-.02em;text-wrap:balance}
+h1 span{color:var(--accent)}
+.role{font-size:19px;color:var(--muted);margin:0 0 22px;max-width:62ch}
+.links{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border:1px solid var(--rule);background:var(--surface);border-radius:6px;font:500 14px/1 var(--body);text-decoration:none}
+.btn.primary{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn.primary:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.case{display:grid;grid-template-columns:220px 1fr;gap:32px;padding:44px 0;border-bottom:1px solid var(--rule)}
+.rail h2{font:700 24px/1.15 var(--display);margin:0 0 6px;text-wrap:balance}
+.rail .meta{font:400 13px/1.5 var(--mono);color:var(--muted);margin:0 0 14px}
+.credits{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.credits li{font:500 12px/1 var(--mono);padding:6px 8px;border-radius:4px;background:color-mix(in srgb,var(--sea) 12%,transparent);color:var(--sea)}
+.body p{margin:0 0 16px;max-width:65ch}
+.body h3{font:600 13px/1 var(--mono);text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin:26px 0 10px}
+.tracks{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule);columns:2;column-gap:28px}
+.tracks li{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid var(--rule);break-inside:avoid;font-variant-numeric:tabular-nums}
+.tracks .n{font:500 12px/1.9 var(--mono);color:var(--sea);width:22px;flex:none}
+.tracks .t{flex:1}
+.tracks .d{font:400 13px/1.8 var(--mono);color:var(--muted)}
+.sfx{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.sfx li{padding:6px 10px;border:1px solid var(--rule);border-radius:999px;font-size:14px;background:var(--surface)}
+.quote{border-left:3px solid var(--accent);padding:4px 0 4px 16px;margin:20px 0;color:var(--muted);font-style:italic;max-width:60ch}
+.quote cite{display:block;font:normal 500 13px/1.4 var(--mono);margin-top:4px;color:var(--ink)}
+.feature{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.feature li{padding-left:18px;position:relative;max-width:65ch}
+.feature li::before{content:"";position:absolute;left:0;top:.65em;width:8px;height:2px;background:var(--accent)}
+.row{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.player-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
+.trk{display:grid;grid-template-columns:36px minmax(0,1fr) minmax(60px,180px) 44px;align-items:center;gap:14px;padding:10px 0;border-bottom:1px solid var(--rule);font-variant-numeric:tabular-nums}
+.trk .t{overflow-wrap:anywhere}
+.trk .d{font:400 13px/1 var(--mono);color:var(--muted);text-align:right}
+.play{width:36px;height:36px;border-radius:50%;border:1px solid var(--rule);background:var(--surface);cursor:pointer;display:grid;place-items:center;padding:0}
+.play::before{content:"";width:0;height:0;border-left:11px solid var(--ink);border-top:7px solid transparent;border-bottom:7px solid transparent;margin-left:3px}
+.trk.on .play{background:var(--accent);border-color:var(--accent)}
+.trk.on .play::before{width:10px;height:12px;border:0;margin:0;background:linear-gradient(90deg,#fff 0 35%,transparent 35% 65%,#fff 65%)}
+.play:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.bar{height:4px;background:var(--rule);border-radius:2px;overflow:hidden;cursor:pointer}
+.bar span{display:block;height:100%;width:0;background:var(--accent)}
+.trk.err .d{color:var(--accent)}
+@media (max-width:520px){.trk{grid-template-columns:36px minmax(0,1fr) 44px}.trk .bar{grid-column:2/4}}
+footer{padding:36px 0 56px;color:var(--muted);font-size:14px}
+footer .tools{font:400 13px/1.7 var(--mono)}
+@media (max-width:720px){
+  .case{grid-template-columns:1fr;gap:16px}
+  .tracks{columns:1}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="alias">Composing as Prologi</p>
+  <h1>Sergei Polevshchikov<span>.</span></h1>
+  <p class="role">Game composer and sound designer with six years as a Unity developer. I write the music, make the sounds, and wire them into the game myself.</p>
+  <nav class="links" aria-label="Profiles">
+    <a class="btn primary" href="https://store.steampowered.com/app/3503730/">Spilled! Soundtrack on Steam</a>
+    <a class="btn" href="https://open.spotify.com/artist/7iaA287wLiVuu4hKI3a7GG">Prologi on Spotify</a>
+    <a class="btn" href="https://www.linkedin.com/in/polevshchikov-sergei/">LinkedIn</a>
+    <a class="btn" href="https://github.com/SergeiPolev">GitHub</a>
+  </nav>
+</header>
+
+<section class="case" aria-labelledby="spilled">
+  <div class="rail">
+    <h2 id="spilled">Spilled!</h2>
+    <p class="meta">Lente · Steam · March 2025<br>Cozy ocean clean-up game</p>
+    <ul class="credits"><li>Composer</li><li>Sound design</li><li>UI audio</li></ul>
+  </div>
+  <div class="body">
+    <p>I composed the full soundtrack and made the sound effects for Spilled!, a relaxing boat game about cleaning up ocean waste. The soundtrack is released on Steam as a separate album credited to Prologi, alongside the game.</p>
+    <blockquote class="quote">“a therapeutic, easy-to-play, and adorable cleaning simulator”<cite>VICE, quoted on the Steam page</cite></blockquote>
+
+    <h3>Selected tracks · from the 11-track OST</h3>
+    <ol class="player-list">
+      <li class="trk" data-src="audio/spilled-sailors-home.mp3"><button type="button" class="play" aria-label="Play Sailor's Home"></button><span class="t">Sailor's Home</span><span class="bar"><span></span></span><span class="d">4:08</span></li>
+      <li class="trk" data-src="audio/spilled-water-bender.mp3"><button type="button" class="play" aria-label="Play Water Bender"></button><span class="t">Water Bender</span><span class="bar"><span></span></span><span class="d">2:50</span></li>
+      <li class="trk" data-src="audio/spilled-ice-caves.mp3"><button type="button" class="play" aria-label="Play Ice Caves"></button><span class="t">Ice Caves</span><span class="bar"><span></span></span><span class="d">2:30</span></li>
+      <li class="trk" data-src="audio/spilled-squirrel-signs.mp3"><button type="button" class="play" aria-label="Play Squirrel Signs"></button><span class="t">Squirrel Signs</span><span class="bar"><span></span></span><span class="d">1:51</span></li>
+      <li class="trk" data-src="audio/spilled-rocks-waltz.mp3"><button type="button" class="play" aria-label="Play Rocks Waltz"></button><span class="t">Rocks Waltz</span><span class="bar"><span></span></span><span class="d">2:08</span></li>
+    </ol>
+
+    <h3>Sound effects</h3>
+    <ol class="player-list">
+      <li class="trk" data-src="audio/spilled-sfx-reel.mp3"><button type="button" class="play" aria-label="Play sound effects reel"></button><span class="t">SFX reel</span><span class="bar"><span></span></span><span class="d">—</span></li>
+    </ol>
+    <ul class="sfx">
+      <li>Motor boat loop</li><li>Water pump</li><li>Waterfall</li><li>Bubbles</li>
+      <li>Full tank</li><li>Animal pick-up</li><li>Coins</li><li>Successful buy</li>
+      <li>Denied buy</li><li>Mission complete</li><li>Location opened</li><li>Tutorial notification</li>
+    </ul>
+
+    <div class="row">
+      <a class="btn" href="https://store.steampowered.com/app/2240080/Spilled/">Game on Steam</a>
+      <a class="btn" href="https://store.steampowered.com/app/3503730/">Soundtrack on Steam</a>
+    </div>
+  </div>
+</section>
+
+<section class="case" aria-labelledby="radio">
+  <div class="rail">
+    <h2 id="radio">Cosmo Radio DJ</h2>
+    <p class="meta">Personal prototype · Unity 6<br>You run a radio station in space</p>
+    <ul class="credits"><li>Audio design</li><li>Voice</li><li>Writing</li><li>Unity dev</li></ul>
+  </div>
+  <div class="body">
+    <p>A game about hosting a live broadcast between the stars. The player queues songs, keeps the signal clean, and the station plays in-world commercials between tracks. I wrote and voiced the commercials and built the systems that make the broadcast feel live.</p>
+    <h3>In-world radio commercials</h3>
+    <ol class="player-list">
+      <li class="trk" data-src="audio/ad-transport-capsules.mp3"><button type="button" class="play" aria-label="Play Transport Capsules ad"></button><span class="t">Transport Capsules — Intergalactic Airlines</span><span class="bar"><span></span></span><span class="d">0:33</span></li>
+      <li class="trk" data-src="audio/ad-dick-strange.mp3"><button type="button" class="play" aria-label="Play Dick Strange ad"></button><span class="t">Dick Strange — Schizo Calls</span><span class="bar"><span></span></span><span class="d">0:22</span></li>
+    </ol>
+    <h3>What I built</h3>
+    <ul class="feature">
+      <li>Signal-tuning minigame: the static drifts, and the closer the player holds the frequency, the more the music comes through the noise.</li>
+      <li>Broadcast queue for songs and commercials, with subtitles timed to each ad and loaded from Google Sheets.</li>
+      <li>Simulated live chat and listener count, so the show reacts like a real stream.</li>
+      <li>Audio visualizer and a nebula backdrop that respond to the broadcast.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="case" aria-labelledby="releases">
+  <div class="rail">
+    <h2 id="releases">Own releases</h2>
+    <p class="meta">Electronic, ambient,<br>orchestral sketches</p>
+    <ul class="credits"><li>Composer</li><li>Mix</li></ul>
+  </div>
+  <div class="body">
+    <p>Outside commissioned work I release music under two names. Prologi is my game and score work. PSCH is where I try out electronic genres, from drum and bass to trance.</p>
+    <ol class="player-list">
+      <li class="trk" data-src="audio/deadlock.mp3"><button type="button" class="play" aria-label="Play Deadlock"></button><span class="t">Deadlock</span><span class="bar"><span></span></span><span class="d">1:14</span></li>
+    </ol>
+    <div class="row">
+      <a class="btn" href="https://open.spotify.com/artist/7iaA287wLiVuu4hKI3a7GG">Prologi on Spotify</a>
+      <a class="btn" href="https://open.spotify.com/artist/7viFWMpLxYljrrNeFam0cc">PSCH on Spotify</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p class="tools">Ableton Live 12 · Spitfire BBC Symphony Orchestra · Unity 6 · C# · voice recording and editing</p>
+  <p>Open to game audio roles and freelance soundtrack work.</p>
+</footer>
+
+</div>
+<script>
+(function(){
+  var audio=new Audio(), cur=null;
+  audio.preload="none";
+  function fmt(t){t=Math.round(t);return Math.floor(t/60)+":"+String(t%60).padStart(2,"0");}
+  function stop(){ if(cur){cur.classList.remove("on");} }
+  document.querySelectorAll(".trk").forEach(function(li){
+    var btn=li.querySelector(".play"), bar=li.querySelector(".bar");
+    btn.addEventListener("click",function(){
+      if(cur===li && !audio.paused){audio.pause();li.classList.remove("on");return;}
+      if(cur!==li){stop();cur=li;audio.src=li.dataset.src;}
+      li.classList.add("on");
+      var p=audio.play(); if(p&&p.catch){p.catch(function(){li.classList.remove("on");});}
+    });
+    bar.addEventListener("click",function(e){
+      if(cur!==li||!audio.duration)return;
+      var r=bar.getBoundingClientRect(); audio.currentTime=(e.clientX-r.left)/r.width*audio.duration;
+    });
+  });
+  audio.addEventListener("timeupdate",function(){ if(cur&&audio.duration){cur.querySelector(".bar span").style.width=(audio.currentTime/audio.duration*100)+"%";} });
+  audio.addEventListener("loadedmetadata",function(){ if(cur){cur.querySelector(".d").textContent=fmt(audio.duration);} });
+  audio.addEventListener("ended",function(){ stop(); });
+  audio.addEventListener("error",function(){ if(cur){cur.classList.remove("on");cur.classList.add("err");cur.querySelector(".d").textContent="n/a";} });
+})();
+</script>
+</body>
+</html>
