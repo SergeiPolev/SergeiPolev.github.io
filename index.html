@@ -70,6 +70,7 @@ h1 span{color:var(--accent)}
 .player-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
 .trk{display:grid;grid-template-columns:36px minmax(0,1fr) minmax(60px,180px) 44px;align-items:center;gap:14px;padding:10px 0;border-bottom:1px solid var(--rule);font-variant-numeric:tabular-nums}
 .trk .t{overflow-wrap:anywhere}
+.trk .note{display:block;font:400 13px/1.4 var(--body);color:var(--muted)}
 .trk .d{font:400 13px/1 var(--mono);color:var(--muted);text-align:right}
 .play{width:36px;height:36px;border-radius:50%;border:1px solid var(--rule);background:var(--surface);cursor:pointer;display:grid;place-items:center;padding:0}
 .play::before{content:"";width:0;height:0;border-left:11px solid var(--ink);border-top:7px solid transparent;border-bottom:7px solid transparent;margin-left:3px}
@@ -171,7 +172,7 @@ footer .tools{font:400 13px/1.7 var(--mono)}
   <div class="body">
     <p>Outside commissioned work I release music under two names. Prologi is my game and score work. PSCH is where I try out electronic genres, from drum and bass to trance.</p>
     <ol class="player-list">
-      <li class="trk" data-src="audio/deadlock.mp3"><button type="button" class="play" aria-label="Play Deadlock"></button><span class="t">Deadlock</span><span class="bar"><span></span></span><span class="d">1:14</span></li>
+      <li class="trk" data-src="audio/deadlock.mp3"><button type="button" class="play" aria-label="Play Deadlock"></button><span class="t">Deadlock <span class="note">fan piece inspired by Valve’s Deadlock</span></span><span class="bar"><span></span></span><span class="d">1:14</span></li>
     </ol>
     <div class="row">
       <a class="btn" href="https://open.spotify.com/artist/7iaA287wLiVuu4hKI3a7GG">Prologi on Spotify</a>
