@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sergei Polevshchikov — Unity Developer CV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Layout: same system as the audio portfolio; CV body in a two-column grid (dates rail + role), sidebar facts below the header. Prints to one clean A4. */
+:root{
+  --paper:#f2f4f3;
+  --surface:#ffffff;
+  --ink:#0f1e27;
+  --muted:#55656d;
+  --rule:#d5dcdc;
+  --accent:#d9480f;
+  --sea:#0b6e79;
+  --display:"Archivo", "Helvetica Neue", Arial, sans-serif;
+  --body:"IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0c161c; --surface:#122029; --ink:#e7eef0; --muted:#97a8ae;
+    --rule:#23343d; --accent:#ff7a3d; --sea:#4fc3cf; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0c161c; --surface:#122029; --ink:#e7eef0; --muted:#97a8ae;
+  --rule:#23343d; --accent:#ff7a3d; --sea:#4fc3cf; color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font:400 16px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+a{color:var(--ink);text-decoration-color:var(--accent);text-underline-offset:3px;text-decoration-thickness:2px}
+a:hover{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+.wrap{max-width:920px;margin:0 auto;padding:0 20px}
+header{padding:56px 0 32px;border-bottom:1px solid var(--rule)}
+.kicker{font:500 13px/1 var(--mono);color:var(--sea);letter-spacing:.06em;text-transform:uppercase;margin:0 0 14px}
+h1{font:800 clamp(34px,6vw,56px)/1.02 var(--display);margin:0 0 12px;letter-spacing:-.02em;text-wrap:balance}
+h1 span{color:var(--accent)}
+.role{font-size:19px;color:var(--muted);margin:0 0 22px;max-width:62ch}
+.links{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border:1px solid var(--rule);background:var(--surface);border-radius:6px;font:500 14px/1 var(--body);text-decoration:none}
+.btn.primary{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn.primary:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;padding:24px 0;border-bottom:1px solid var(--rule)}
+.facts h2{font:600 12px/1 var(--mono);text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin:0 0 10px}
+.facts ul{list-style:none;margin:0;padding:0;font-size:15px;line-height:1.55}
+section.block{padding:36px 0;border-bottom:1px solid var(--rule)}
+section.block > h2{font:700 13px/1 var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 22px}
+.job{display:grid;grid-template-columns:170px 1fr;gap:28px;padding:0 0 26px}
+.job:last-child{padding-bottom:0}
+.when{font:400 13px/1.6 var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.job h3{font:700 20px/1.2 var(--display);margin:0 0 2px;text-wrap:balance}
+.job .title{font-weight:600;color:var(--sea);margin:0 0 10px}
+.job ul{margin:0;padding:0;list-style:none;display:grid;gap:6px}
+.job li{padding-left:18px;position:relative;max-width:66ch}
+.job li::before{content:"";position:absolute;left:0;top:.7em;width:8px;height:2px;background:var(--accent)}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 0;padding:0;list-style:none}
+.tags li{font:500 12px/1 var(--mono);padding:6px 8px;border-radius:4px;background:color-mix(in srgb,var(--sea) 12%,transparent);color:var(--sea)}
+.tags li::before{display:none}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.two h3{font:700 17px/1.3 var(--display);margin:0 0 4px}
+.two p{margin:0 0 14px;color:var(--muted);max-width:60ch}
+footer{padding:28px 0 56px;color:var(--muted);font-size:14px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
+@media (max-width:720px){
+  .facts{grid-template-columns:1fr 1fr}
+  .job{grid-template-columns:1fr;gap:4px}
+  .two{grid-template-columns:1fr}
+}
+@media print{
+  :root{--paper:#fff;--surface:#fff;--ink:#000;--muted:#444;--rule:#ccc}
+  body{font-size:11.5px}
+  header{padding:0 0 14px}
+  h1{font-size:30px}
+  .role{font-size:13px;margin-bottom:8px}
+  .links .btn{border:0;padding:0 10px 0 0;background:none;color:#000}
+  .links .btn.noprint, footer{display:none}
+  section.block{padding:14px 0;break-inside:auto}
+  .job{grid-template-columns:120px 1fr;gap:14px;padding-bottom:12px;break-inside:avoid}
+  .facts{padding:12px 0}
+  a{text-decoration:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="kicker">Curriculum vitae</p>
+  <h1>Sergei Polevshchikov<span>.</span></h1>
+  <p class="role">Unity developer with six years in mobile and indie games. I build gameplay, shaders and VFX, and I compose music and sound for games under the name Prologi.</p>
+  <nav class="links" aria-label="Contacts">
+    <a class="btn primary" href="mailto:sergei.polevshchikov@gmail.com">sergei.polevshchikov@gmail.com</a>
+    <a class="btn" href="https://t.me/sergei_polev">Telegram @sergei_polev</a>
+    <a class="btn" href="https://www.linkedin.com/in/polevshchikov-sergei/">LinkedIn</a>
+    <a class="btn" href="https://github.com/SergeiPolev">GitHub</a>
+    <a class="btn noprint" href="../">Audio portfolio</a>
+  </nav>
+</header>
+
+<div class="facts">
+  <div>
+    <h2>Engine &amp; code</h2>
+    <ul><li>Unity 2D / 3D</li><li>C#</li><li>Git</li></ul>
+  </div>
+  <div>
+    <h2>Visuals</h2>
+    <ul><li>Shader Graph, HLSL</li><li>Particle System VFX</li><li>Profiling: draw calls, overdraw</li></ul>
+  </div>
+  <div>
+    <h2>Audio &amp; tools</h2>
+    <ul><li>Ableton Live</li><li>Game music and SFX</li><li>Figma, Blender basics</li></ul>
+  </div>
+  <div>
+    <h2>Languages</h2>
+    <ul><li>English — B2</li><li>Russian — native</li></ul>
+  </div>
+</div>
+
+<section class="block" aria-labelledby="exp">
+  <h2 id="exp">Experience</h2>
+
+  <article class="job">
+    <div class="when">2026<br>Freelance, remote</div>
+    <div>
+      <h3>Voodoo</h3>
+      <p class="title">Unity Developer, marketing creatives · Mob Control</p>
+      <ul>
+        <li>Built gameplay ad creatives for Mob Control from briefs and video references: set up Unity scenes, recorded gameplay and delivered vertical 60 fps videos with hook, logo and music variants.</li>
+        <li>Prototyped new level ideas for ads, such as moving transporter platforms, climbing gates and serpentine roads, and tuned crowd movement, pacing and visuals.</li>
+        <li>Worked with Unity Timeline-based tooling for recording deterministic gameplay captures.</li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="job">
+    <div class="when">Feb 2023 – Oct 2025<br>Remote</div>
+    <div>
+      <h3>Everyday Games</h3>
+      <p class="title">Unity Developer</p>
+      <ul>
+        <li>Worked on multiple 2D and 3D projects.</li>
+        <li>Created a template project used by the whole team.</li>
+        <li>Made several shaders in Shader Graph.</li>
+        <li>Designed a stats and skills system in the style of classic roguelikes.</li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="job">
+    <div class="when">Jun 2024 – Feb 2025<br>Remote</div>
+    <div>
+      <h3>Spilled!</h3>
+      <p class="title">Developer &amp; Composer</p>
+      <ul>
+        <li>Composed the soundtrack and sound effects for a cozy ocean clean-up game by Lente, a Golden Joystick nominee for self-published indie game of the year.</li>
+        <li>Built the game's sound system in Unity.</li>
+        <li>The 11-track soundtrack is sold on Steam as a separate album.</li>
+      </ul>
+      <ul class="tags"><li><a href="https://store.steampowered.com/app/2240080/Spilled/">Steam</a></li><li><a href="../">Listen</a></li></ul>
+    </div>
+  </article>
+
+  <article class="job">
+    <div class="when">Jun 2022 – Jan 2023<br>Remote</div>
+    <div>
+      <h3>D2D Games</h3>
+      <p class="title">Unity Developer</p>
+      <ul>
+        <li>Developed hyper-casual games across genres, many of them physics-based.</li>
+        <li>Built and implemented UI for multiple projects: menus, HUDs and gameplay interfaces.</li>
+        <li>Created VFX for 2D and 3D games with the Particle System and Shader Graph.</li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="job">
+    <div class="when">Dec 2020 – Jun 2022<br>Remote</div>
+    <div>
+      <h3>Dorfer Games</h3>
+      <p class="title">Unity Developer</p>
+      <ul>
+        <li>Developed hyper-casual prototypes for CPI tests and videos for CTR tests.</li>
+        <li>Mentored a small team of junior developers and advised 2D and 3D artists on Unity workflow.</li>
+      </ul>
+    </div>
+  </article>
+</section>
+
+<section class="block" aria-labelledby="more">
+  <h2 id="more">Projects &amp; education</h2>
+  <div class="two">
+    <div>
+      <h3>Shipped games</h3>
+      <p>Spilled!, Stand Your Ground, Sandtrix, Yummie Sort and more.</p>
+      <h3>Game jams</h3>
+      <p>Ludum Dare 51 and 54, Siberian Game Jam.</p>
+    </div>
+    <div>
+      <h3>MPEI, Moscow</h3>
+      <p>Applied Informatics, 2020–2022. Not completed because of relocation.</p>
+      <h3>Moscow Programming School</h3>
+      <p>Programming fundamentals and discrete mathematics, 2014–2016.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>Updated November 2026</span>
+  <a href="../">Game audio portfolio →</a>
+</footer>
+
+</div>
+</body>
+</html>
